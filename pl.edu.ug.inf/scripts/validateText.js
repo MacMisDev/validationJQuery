@@ -10,15 +10,19 @@
         }, options);
 
         //Znajdź input teksowy
-        var input = $('input[type="text"]');
+        var input = $(this).find('input[type="text"]');
         //Znajdź input email
-        var email = $('input[type="email"]');
+        var email = $(this).find('input[type="email"]');
         //Znajdź guzik submit
-        var submit = $(':submit');
+        var submit = $(this).find(':submit');
         //Znajdź input password
-        var pass = $(':password');
+        var pass = $(this).find(':password');
+        var form = $(this);
 
         submit.attr('disabled', 'disabled');
+
+        console.log($(this));
+        //$('#error').html(input.length);
 
         input.blur(function(){
 
@@ -38,7 +42,7 @@
                     borderColor : 'initial'
                 });
 
-                checkInputs();
+                checkInputs(form);
             }
 
         });
@@ -61,7 +65,7 @@
                     borderColor : 'initial'
                 });
 
-                checkInputs();
+                checkInputs(form);
             }
 
         });
@@ -82,7 +86,7 @@
                     borderColor : 'initial'
                 });
 
-                checkInputs();
+                checkInputs(form);
             }
 
         });
@@ -92,12 +96,14 @@
     };
 
     //Metoda sprawdzająca walidację poszczególnych inputów.
-    function checkInputs(){
+    function checkInputs( myObj ){
         var check = true;
-        var submit = $(':submit');
+        var submit = myObj.find(':submit');
+
+        console.log(myObj);
 
         //Dla każdego inputa zrób..
-        $('input').each(function(){
+        myObj.find('input').each(function(){
 
             if($(this).css('borderColor') === 'rgb(255, 0, 0)' || $(this).val() === ''){
                 check = false;
