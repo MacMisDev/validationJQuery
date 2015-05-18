@@ -1,5 +1,4 @@
 $(document).ready(function (){
 
-    $('#form').validateText( );
-
+    $('form').validateText( );
 });

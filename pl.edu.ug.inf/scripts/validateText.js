@@ -9,90 +9,91 @@
             entropy : 50
         }, options);
 
-        //Znajdź input teksowy
-        var input = $(this).find('input[type="text"]');
-        //Znajdź input email
-        var email = $(this).find('input[type="email"]');
-        //Znajdź guzik submit
-        var submit = $(this).find(':submit');
-        //Znajdź input password
-        var pass = $(this).find(':password');
-        var form = $(this);
-
-        submit.attr('disabled', 'disabled');
-
-        console.log($(this));
-        //$('#error').html(input.length);
-
-        input.blur(function(){
-
-            //Pobranie wartości pola
-            var value = $(this).val();
-            //Utworzenie regexu do sprawdzenia
-            var regex = new RegExp(settings.patternText);
-
-            if(!regex.test(value)){
-                $(this).css({
-                    borderColor : 'red'
-                });
-
-                submit.attr('disabled', 'disabled');
-            }else{
-                $(this).css({
-                    borderColor : 'initial'
-                });
-
-                checkInputs(form);
-            }
-
-        });
-
-        email.blur(function(){
-
-            //Pobranie wartości pola
-            var value = $(this).val();
-            //Utworzenie regexu do sprawdzenia
-            var regex = new RegExp(settings.patternEmail);
-
-            if(!regex.test(value)){
-                $(this).css({
-                    borderColor : 'red'
-                });
-
-                submit.attr('disabled', 'disabled');
-            }else{
-                $(this).css({
-                    borderColor : 'initial'
-                });
-
-                checkInputs(form);
-            }
-
-        });
-
-        pass.blur(function(){
-
-            //Pobranie wartości pola
-            var value = $(this).val();
-
-            if( countEntropy(value) < settings.entropy ){
-                $(this).css({
-                    borderColor : 'red'
-                });
-
-                submit.attr('disabled', 'disabled');
-            }else{
-                $(this).css({
-                    borderColor : 'initial'
-                });
-
-                checkInputs(form);
-            }
-
-        });
 
         //Chaining
-        return this;
+        return this.each(function(){
+            //Znajdź input teksowy
+            var input = $(this).find('input[type="text"]');
+            //Znajdź input email
+            var email = $(this).find('input[type="email"]');
+            //Znajdź guzik submit
+            var submit = $(this).find(':submit');
+            //Znajdź input password
+            var pass = $(this).find(':password');
+            var form = $(this);
+
+            submit.attr('disabled', 'disabled');
+
+            console.log($(this));
+            //$('#error').html(input.length);
+
+            input.blur(function(){
+
+                //Pobranie wartości pola
+                var value = $(this).val();
+                //Utworzenie regexu do sprawdzenia
+                var regex = new RegExp(settings.patternText);
+
+                if(!regex.test(value)){
+                    $(this).css({
+                        borderColor : 'red'
+                    });
+
+                    submit.attr('disabled', 'disabled');
+                }else{
+                    $(this).css({
+                        borderColor : 'initial'
+                    });
+
+                    checkInputs(form);
+                }
+
+            });
+
+            email.blur(function(){
+
+                //Pobranie wartości pola
+                var value = $(this).val();
+                //Utworzenie regexu do sprawdzenia
+                var regex = new RegExp(settings.patternEmail);
+
+                if(!regex.test(value)){
+                    $(this).css({
+                        borderColor : 'red'
+                    });
+
+                    submit.attr('disabled', 'disabled');
+                }else{
+                    $(this).css({
+                        borderColor : 'initial'
+                    });
+
+                    checkInputs(form);
+                }
+
+            });
+
+            pass.blur(function(){
+
+                //Pobranie wartości pola
+                var value = $(this).val();
+
+                if( countEntropy(value) < settings.entropy ){
+                    $(this).css({
+                        borderColor : 'red'
+                    });
+
+                    submit.attr('disabled', 'disabled');
+                }else{
+                    $(this).css({
+                        borderColor : 'initial'
+                    });
+
+                    checkInputs(form);
+                }
+
+            });
+        });
     };
 
     //Metoda sprawdzająca walidację poszczególnych inputów.
